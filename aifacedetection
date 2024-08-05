@@ -1,0 +1,21 @@
+!pip install mtcnn
+!pip install keras
+!pip install tensorflow
+
+from mtcnn.mtcnn import MTCNN
+from PIL import Image
+import matplotlib.pyplot as plt
+
+
+image = plt.imread('lo.jpg')
+
+detector = MTCNN()
+faces = detector.detect_faces(image)
+
+print('Number of faces detected:',len(faces))
+
+for face in faces:
+  x, y, width, height = face['box']
+  plt.plot([x, x + width, x + width, x, x], [y, y, y + height,y + height, y], 'r')
+  plt.imshow(image)
+  plt.show()
